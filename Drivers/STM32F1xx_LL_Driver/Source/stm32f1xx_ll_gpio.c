@@ -170,6 +170,7 @@ ErrorStatus LL_GPIO_DeInit(GPIO_TypeDef *GPIOx)
   */
 ErrorStatus LL_GPIO_Init(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStruct)
 {
+  uint32_t pinmask    = 0x00000000U;
   uint32_t pinpos     = 0x00000000U;
   uint32_t currentpin = 0x00000000U;
 
@@ -181,19 +182,27 @@ ErrorStatus LL_GPIO_Init(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStru
   
   /* ------------------------- Configure the port pins ---------------- */
   /* Initialize  pinpos on first pin set */
-  pinpos = POSITION_VAL(GPIO_InitStruct->Pin);
+  pinmask = (GPIO_InitStruct->Pin & 0x00FFFF00U) >> 8 ;
+  pinpos = POSITION_VAL(pinmask);
 
   /* Configure the port pins */
-  while ((((GPIO_InitStruct->Pin) & 0x0000FFFFU) >> pinpos) != 0x00000000U)
+  while ((pinmask >> pinpos) != 0U)
   {
+    /* skip if bit is not set */
+    if ((pinmask & (1U << pinpos)) == 0U)
+    {
+      pinpos++;
+      continue;
+    }
+
     /* Get current io position */
     if(pinpos <8 )
     {
-      currentpin = (GPIO_InitStruct->Pin) & (0x00000101U << pinpos);
+      currentpin = (0x00000101U << pinpos);
     }
     else
     {
-      currentpin = (GPIO_InitStruct->Pin) & ((0x00010001U << (pinpos-8)) | 0x04000000U);
+      currentpin = ((0x00010001U << (pinpos-8)) | 0x04000000U);
     }
 
     if (currentpin)
@@ -204,22 +213,19 @@ ErrorStatus LL_GPIO_Init(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStru
       /* Pull-up Pull down resistor configuration*/
       LL_GPIO_SetPinPull(GPIOx, currentpin, GPIO_InitStruct->Pull);
 	  
-      if ((GPIO_InitStruct->Mode == LL_GPIO_MODE_OUTPUT) || (GPIO_InitStruct->Mode == LL_GPIO_MODE_FLOATING))
+      if ((GPIO_InitStruct->Mode == LL_GPIO_MODE_OUTPUT) || (GPIO_InitStruct->Mode == LL_GPIO_MODE_ALTERNATE))
       {
+        /* Check Output mode parameters */
+        assert_param(IS_LL_GPIO_OUTPUT_TYPE(GPIO_InitStruct->OutputType));
+
+        /* Output mode configuration*/
+        LL_GPIO_SetPinOutputType(GPIOx, currentpin, GPIO_InitStruct->OutputType);
+
         /* Speed mode configuration */
         LL_GPIO_SetPinSpeed(GPIOx, currentpin, GPIO_InitStruct->Speed);
       }
     }
     pinpos++;
-  }
-  
-  if ((GPIO_InitStruct->Mode == LL_GPIO_MODE_OUTPUT) || (GPIO_InitStruct->Mode == LL_GPIO_MODE_FLOATING))
-  {
-    /* Check Output mode parameters */
-    assert_param(IS_LL_GPIO_OUTPUT_TYPE(GPIO_InitStruct->OutputType));
-
-    /* Output mode configuration*/
-    LL_GPIO_SetPinOutputType(GPIOx, GPIO_InitStruct->Pin, GPIO_InitStruct->OutputType);
   }
   return (SUCCESS);
 }
