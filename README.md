@@ -26,5 +26,5 @@ Author made repositories for other series:
 
 -   [STM32L0 series][2]
 
-[1]:  //st.com/content/st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-mcu-packages/stm32cubef1.html   "STM32CubeF1"
+[1]:  //www.st.com/content/st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-mcu-packages/stm32cubef1.html   "STM32CubeF1"
 [2]:  //github.com/vitkorob/stm32l0xx-ll-driver/
