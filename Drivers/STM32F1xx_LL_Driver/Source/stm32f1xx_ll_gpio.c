@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f1xx_ll_gpio.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    12-May-2017
   * @brief   GPIO LL module driver.
   ******************************************************************************
   * @attention
@@ -68,7 +66,7 @@
                                             ((__VALUE__) == LL_GPIO_MODE_FLOATING)     ||\
                                             ((__VALUE__) == LL_GPIO_MODE_INPUT)        ||\
                                             ((__VALUE__) == LL_GPIO_MODE_OUTPUT)       ||\
-                                            ((__VALUE__) == LL_GPIO_MODE_ALTERNATE))    
+                                            ((__VALUE__) == LL_GPIO_MODE_ALTERNATE))
 
 #define IS_LL_GPIO_SPEED(__VALUE__)        (((__VALUE__) == LL_GPIO_SPEED_FREQ_LOW)       ||\
                                             ((__VALUE__) == LL_GPIO_SPEED_FREQ_MEDIUM)    ||\
@@ -144,7 +142,7 @@ ErrorStatus LL_GPIO_DeInit(GPIO_TypeDef *GPIOx)
     LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOF);
   }
 #endif
-#if defined(GPIOG)  
+#if defined(GPIOG)
   else if (GPIOx == GPIOG)
   {
     LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOG);
@@ -179,7 +177,7 @@ ErrorStatus LL_GPIO_Init(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStru
   assert_param(IS_LL_GPIO_PIN(GPIO_InitStruct->Pin));
   assert_param(IS_LL_GPIO_MODE(GPIO_InitStruct->Mode));
   assert_param(IS_LL_GPIO_PULL(GPIO_InitStruct->Pull));
-  
+
   /* ------------------------- Configure the port pins ---------------- */
   /* Initialize  pinpos on first pin set */
   pinmask = (GPIO_InitStruct->Pin & 0x00FFFF00U) >> 8 ;
@@ -209,10 +207,10 @@ ErrorStatus LL_GPIO_Init(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStru
     {
       /* Pin Mode configuration */
       LL_GPIO_SetPinMode(GPIOx, currentpin, GPIO_InitStruct->Mode);
-	  
+	
       /* Pull-up Pull down resistor configuration*/
       LL_GPIO_SetPinPull(GPIOx, currentpin, GPIO_InitStruct->Pull);
-	  
+	
       if ((GPIO_InitStruct->Mode == LL_GPIO_MODE_OUTPUT) || (GPIO_InitStruct->Mode == LL_GPIO_MODE_ALTERNATE))
       {
         /* Check Output mode parameters */

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    system_stm32f1xx.h
   * @author  MCD Application Team
-  * @version V4.2.0
-  * @date    31-March-2017
   * @brief   CMSIS Cortex-M3 Device Peripheral Access Layer System Header File.
   ******************************************************************************
   * @attention
@@ -41,8 +39,8 @@
 
 /** @addtogroup stm32f10x_system
   * @{
-  */  
-  
+  */
+
 /**
   * @brief Define to prevent recursive inclusion
   */
@@ -51,7 +49,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /** @addtogroup STM32F10x_System_Includes
   * @{
@@ -93,7 +91,7 @@ extern const uint8_t  APBPrescTable[8U];   /*!< APB prescalers table values */
 /** @addtogroup STM32F10x_System_Exported_Functions
   * @{
   */
-  
+
 extern void SystemInit(void);
 extern void SystemCoreClockUpdate(void);
 /**
@@ -109,8 +107,8 @@ extern void SystemCoreClockUpdate(void);
 /**
   * @}
   */
-  
+
 /**
   * @}
-  */  
+  */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

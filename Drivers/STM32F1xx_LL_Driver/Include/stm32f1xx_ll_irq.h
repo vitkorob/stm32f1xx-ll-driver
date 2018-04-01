@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F1xx_LL_IRQ_H
@@ -50,7 +50,7 @@ extern "C" {
 
 /** @defgroup IRQ_LL IRQ
   * @{
-  */ 
+  */
 
 /* Exported constants --------------------------------------------------------*/
 /** @defgroup IRQ_Exported_Constants   IRQ Exported Constants
@@ -122,7 +122,7 @@ ErrorStatus LL_IRQ_DeInit(IRQn_Type IRQn);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

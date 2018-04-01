@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f1xx_ll_rcc.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    12-May-2017
   * @brief   Header file of RCC LL module.
   ******************************************************************************
   * @attention
@@ -322,8 +320,8 @@ typedef struct
 #if defined(RCC_CFGR_USBPRE)
 #define LL_RCC_USB_CLKSOURCE_PLL             RCC_CFGR_USBPRE        /*!< PLL clock is not divided */
 #define LL_RCC_USB_CLKSOURCE_PLL_DIV_1_5     0x00000000U            /*!< PLL clock is divided by 1.5 */
-#endif /*RCC_CFGR_USBPRE*/                   
-#if defined(RCC_CFGR_OTGFSPRE)               
+#endif /*RCC_CFGR_USBPRE*/
+#if defined(RCC_CFGR_OTGFSPRE)
 #define LL_RCC_USB_CLKSOURCE_PLL_DIV_2       RCC_CFGR_OTGFSPRE      /*!< PLL clock is divided by 2 */
 #define LL_RCC_USB_CLKSOURCE_PLL_DIV_3       0x00000000U            /*!< PLL clock is divided by 3 */
 #endif /*RCC_CFGR_OTGFSPRE*/

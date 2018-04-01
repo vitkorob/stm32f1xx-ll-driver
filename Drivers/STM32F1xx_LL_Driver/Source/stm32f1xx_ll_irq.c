@@ -97,7 +97,7 @@ static void IntDefaultHandler(void);
   */
 
 /** @addtogroup IRQ_Exported_Functions_Group1
-  * @brief  Initialization and Configuration functions. 
+  * @brief  Initialization and Configuration functions.
   * @{
   */
 

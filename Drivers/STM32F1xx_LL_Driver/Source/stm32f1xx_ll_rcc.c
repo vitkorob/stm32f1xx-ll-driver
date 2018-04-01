@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f1xx_ll_rcc.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    12-May-2017
   * @brief   RCC LL module driver.
   ******************************************************************************
   * @attention
@@ -106,7 +104,7 @@ uint32_t RCC_PLL2_GetFreqClockFreq(void);
   * @brief  Reset the RCC clock configuration to the default reset state.
   * @note   The default reset state of the clock configuration is given below:
   *         - HSI ON and used as system clock source
-  *         - HSE PLL, PLL2, PLL3 OFF 
+  *         - HSE PLL, PLL2, PLL3 OFF
   *         - AHB, APB1 and APB2 prescaler set to 1.
   *         - CSS, MCO OFF
   *         - All interrupts disabled
@@ -198,9 +196,9 @@ ErrorStatus LL_RCC_DeInit(void)
   *         and different peripheral clocks available on the device.
   * @note   If SYSCLK source is HSI, function returns values based on HSI_VALUE(**)
   * @note   If SYSCLK source is HSE, function returns values based on HSE_VALUE(***)
-  * @note   If SYSCLK source is PLL, function returns values based on 
+  * @note   If SYSCLK source is PLL, function returns values based on
   *         HSI_VALUE(**) or HSE_VALUE(***) multiplied/divided by the PLL factors.
-  * @note   (**) HSI_VALUE is a defined constant but the real value may vary 
+  * @note   (**) HSI_VALUE is a defined constant but the real value may vary
   *              depending on the variations in voltage and temperature.
   * @note   (***) HSE_VALUE is a defined constant, user has to ensure that
   *               HSE_VALUE is same as the real frequency of the crystal used.
@@ -287,7 +285,7 @@ uint32_t LL_RCC_GetUSBClockFreq(uint32_t USBxSource)
   /* USBCLK clock frequency */
   switch (LL_RCC_GetUSBClockSource(USBxSource))
   {
-#if defined(RCC_CFGR_USBPRE)  
+#if defined(RCC_CFGR_USBPRE)
     case LL_RCC_USB_CLKSOURCE_PLL:        /* PLL clock used as USB clock source */
       if (LL_RCC_PLL_IsReady())
       {
@@ -304,8 +302,8 @@ uint32_t LL_RCC_GetUSBClockFreq(uint32_t USBxSource)
       break;
 #endif /* RCC_CFGR_USBPRE */
 #if defined(RCC_CFGR_OTGFSPRE)
-    /* USBCLK = PLLVCO/2 
-              = (2 x PLLCLK) / 2 
+    /* USBCLK = PLLVCO/2
+              = (2 x PLLCLK) / 2
               = PLLCLK */
     case LL_RCC_USB_CLKSOURCE_PLL_DIV_2:        /* PLL clock used as USB clock source */
       if (LL_RCC_PLL_IsReady())
@@ -314,7 +312,7 @@ uint32_t LL_RCC_GetUSBClockFreq(uint32_t USBxSource)
       }
       break;
 
-    /* USBCLK = PLLVCO/3 
+    /* USBCLK = PLLVCO/3
               = (2 x PLLCLK) / 3 */
     case LL_RCC_USB_CLKSOURCE_PLL_DIV_3:        /* PLL clock divided by 3 used as USB clock source */
     default:
