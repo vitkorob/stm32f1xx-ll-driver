@@ -67,9 +67,9 @@
                                                  ((__VALUE__) == LL_I2C_MODE_SMBUS_DEVICE) || \
                                                  ((__VALUE__) == LL_I2C_MODE_SMBUS_DEVICE_ARP))
 
-#define IS_I2C_CLOCK_SPEED(__VALUE__)           (((__VALUE__) > 0U) && ((__VALUE__) <= LL_I2C_MAX_SPEED_FAST))
+#define IS_LL_I2C_CLOCK_SPEED(__VALUE__)           (((__VALUE__) > 0U) && ((__VALUE__) <= LL_I2C_MAX_SPEED_FAST))
 
-#define IS_I2C_DUTY_CYCLE(__VALUE__)            (((__VALUE__) == LL_I2C_DUTYCYCLE_2) || \
+#define IS_LL_I2C_DUTY_CYCLE(__VALUE__)            (((__VALUE__) == LL_I2C_DUTYCYCLE_2) || \
                                                  ((__VALUE__) == LL_I2C_DUTYCYCLE_16_9))
 
 #define IS_LL_I2C_OWN_ADDRESS1(__VALUE__)       ((__VALUE__) <= 0x000003FFU)
@@ -98,8 +98,8 @@
   * @brief  De-initialize the I2C registers to their default reset values.
   * @param  I2Cx I2C Instance.
   * @retval An ErrorStatus enumeration value:
-  *          - SUCCESS: I2C registers are de-initialized
-  *          - ERROR: I2C registers are not de-initialized
+  *          - SUCCESS  I2C registers are de-initialized
+  *          - ERROR  I2C registers are not de-initialized
   */
 uint32_t LL_I2C_DeInit(I2C_TypeDef *I2Cx)
 {
@@ -140,8 +140,8 @@ uint32_t LL_I2C_DeInit(I2C_TypeDef *I2Cx)
   * @param  I2Cx I2C Instance.
   * @param  I2C_InitStruct pointer to a @ref LL_I2C_InitTypeDef structure.
   * @retval An ErrorStatus enumeration value:
-  *          - SUCCESS: I2C registers are initialized
-  *          - ERROR: Not applicable
+  *          - SUCCESS  I2C registers are initialized
+  *          - ERROR  Not applicable
   */
 uint32_t LL_I2C_Init(I2C_TypeDef *I2Cx, LL_I2C_InitTypeDef *I2C_InitStruct)
 {
@@ -152,8 +152,8 @@ uint32_t LL_I2C_Init(I2C_TypeDef *I2Cx, LL_I2C_InitTypeDef *I2C_InitStruct)
 
   /* Check the I2C parameters from I2C_InitStruct */
   assert_param(IS_LL_I2C_PERIPHERAL_MODE(I2C_InitStruct->PeripheralMode));
-  assert_param(IS_I2C_CLOCK_SPEED(I2C_InitStruct->ClockSpeed));
-  assert_param(IS_I2C_DUTY_CYCLE(I2C_InitStruct->DutyCycle));
+  assert_param(IS_LL_I2C_CLOCK_SPEED(I2C_InitStruct->ClockSpeed));
+  assert_param(IS_LL_I2C_DUTY_CYCLE(I2C_InitStruct->DutyCycle));
   assert_param(IS_LL_I2C_OWN_ADDRESS1(I2C_InitStruct->OwnAddress1));
   assert_param(IS_LL_I2C_TYPE_ACKNOWLEDGE(I2C_InitStruct->TypeAcknowledge));
   assert_param(IS_LL_I2C_OWN_ADDRSIZE(I2C_InitStruct->OwnAddrSize));
