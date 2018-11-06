@@ -7,9 +7,7 @@ AR      = $(PREFIX)-ar
 CFLAGS  = -mthumb \
         -mcpu=cortex-m3 \
         -std=c99 \
-        -Wall \
-        -O3 \
-        -c
+        -Wall
 
 # Paths
 INC_PATHS   = -IInclude \
@@ -24,9 +22,7 @@ LIBS    = -lc
 
 # Definitions
 DEFS    = -DUSE_FULL_LL_DRIVER=1 \
-        -DUSE_FULL_ASSERT=1 \
-        -DSTM32F103x6 \
-        -DDEBUG
+        -DSTM32F103x6
 
 OBJS    = $(OUT_PATH)stm32f1xx_ll_adc.o \
         $(OUT_PATH)stm32f1xx_ll_crc.o \
@@ -47,14 +43,29 @@ OBJS    = $(OUT_PATH)stm32f1xx_ll_adc.o \
 
 LIB = $(OUT_PATH)libdriver.a
 
-#The main all target
-all: $(LIB)
-.PHONY: all
+# The main Release target
+Release: CFLAGS += -O2
+Release: DEFS += -DNDEBUG
+Release: $(LIB)
+.PHONY: Release
 
-# Implicit rules
-$(OUT_PATH)%.o: $(SRC_PATH)%.c Makefile
-	$(CC) $(CFLAGS) $(INC_PATHS) $(DEFS) $(<) -o $(@)
+# The main Debug target
+Debug: CFLAGS += -g
+Debug: DEFS += -DUSE_FULL_ASSERT=1
+Debug: DEFS += -DDEBUG
+Debug: $(LIB)
+.PHONY: Debug
 
-# The libdriver.a
-$(OUT_PATH)%.a: $(OBJS)
-	$(AR) -cr $(@) $(^)
+# The library depends
+$(LIB): $(OBJS) Makefile
+
+# Objects depend
+$(OBJS): Makefile
+
+# Implicit rule
+$(OUT_PATH)%.o: $(SRC_PATH)%.c
+	$(CC) -c $(CFLAGS) $(INC_PATHS) $(DEFS) $(<) -o $(@)
+
+# Implicit rule
+$(OUT_PATH)%.a:
+	$(AR) -cr $(@) $(filter %.o, $(^))
