@@ -1,13 +1,14 @@
 # Tools and options
-CC  = arm-none-eabi-gcc
-AR  = arm-none-eabi-ar
+PREFIX  = arm-none-eabi
+CC      = $(PREFIX)-gcc
+AR      = $(PREFIX)-ar
 
 # The flags passed to the compiler
 CFLAGS  = -mthumb \
         -mcpu=cortex-m3 \
         -std=c99 \
         -Wall \
-        -pedantic \
+        -O3 \
         -c
 
 # Paths
@@ -17,6 +18,9 @@ INC_PATHS   = -IInclude \
 LIB_PATHS   =
 SRC_PATH    = Source/
 OUT_PATH    = gcc/
+
+# Libs
+LIBS    = -lc
 
 # Definitions
 DEFS    = -DUSE_FULL_LL_DRIVER=1 \
@@ -53,4 +57,4 @@ $(OUT_PATH)%.o: $(SRC_PATH)%.c Makefile
 
 # The libdriver.a
 $(OUT_PATH)%.a: $(OBJS)
-	${AR} -cr ${@} ${^}
+	$(AR) -cr $(@) $(^)
