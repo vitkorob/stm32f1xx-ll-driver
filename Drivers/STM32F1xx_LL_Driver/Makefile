@@ -56,6 +56,11 @@ Debug: DEFS += -DDEBUG
 Debug: $(LIB)
 .PHONY: Debug
 
+# Clean target
+clean:
+	$(RM) $(LIB) $(OBJS)
+.PHONY: clean
+
 # The library depends
 $(LIB): $(OBJS) Makefile
 
