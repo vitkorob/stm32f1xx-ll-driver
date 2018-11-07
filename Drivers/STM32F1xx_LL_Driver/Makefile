@@ -7,7 +7,9 @@ AR      = $(PREFIX)-ar
 CFLAGS  = -mthumb \
         -mcpu=cortex-m3 \
         -std=c99 \
-        -Wall
+        -Wall \
+        -ffunction-sections \
+        -fdata-sections
 
 # Paths
 INC_PATHS   = -IInclude \
@@ -73,4 +75,4 @@ $(OUT_PATH)%.o: $(SRC_PATH)%.c
 
 # Implicit rule
 $(OUT_PATH)%.a:
-	$(AR) -cr $(@) $(filter %.o, $(^))
+	$(AR) -crs $(@) $(filter %.o, $(^))
